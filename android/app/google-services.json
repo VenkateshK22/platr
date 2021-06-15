@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358329444309",
+    "project_id": "platr-it-solutions",
+    "storage_bucket": "platr-it-solutions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358329444309:android:558b8b9f4173d951993f5c",
+        "android_client_info": {
+          "package_name": "com.example.pla_tr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358329444309-ms9vqj123g5uu68f4hn1rdt6jjg1sl3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDbLDEQo5zv0Ne_TVw0yyPTP_m_1HZdJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358329444309-ms9vqj123g5uu68f4hn1rdt6jjg1sl3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
