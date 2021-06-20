@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pla_tr/companypages/ApplyCompany.dart';
-import 'package:pla_tr/models/user.dart';
+
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 
@@ -13,12 +13,12 @@ class CompanyList extends StatefulWidget {
 
 class _CompanyListState extends State<CompanyList> {
   Stream companyStream;
-  DatabaseService databaseService = new DatabaseService(UserId());
+  DatabaseService databaseService = new DatabaseService();
 
   @override
   initState() {
     super.initState();
-    databaseService.getCompaniesData().then((value) {
+    databaseService.getBegCompaniesData().then((value) {
       setState(() {
         companyStream = value;
       });
@@ -36,7 +36,7 @@ class _CompanyListState extends State<CompanyList> {
               child: Center(child: CircularProgressIndicator()),
             );
           } else {
-            print("inside else of builder");
+            print("inside else of builder beginner");
             return ListView.builder(
               itemCount: stream.data.docs.length,
               itemBuilder: (context, index) {
@@ -84,7 +84,17 @@ class CompanyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ApplyCompany.id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ApplyCompany(
+              companyid: companyId,
+              companyimagelink: companyLogoUrl,
+              companyDetails: companyDetails,
+              companyName: companyName,
+            ),
+          ),
+        );
       },
       child: Container(
         width: double.infinity,

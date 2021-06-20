@@ -1,7 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pla_tr/companypages/AdvCompanyList.dart';
+import 'package:pla_tr/companypages/InterCompanyList.dart';
 import 'package:pla_tr/quiz/Quiz_Play.dart';
 import 'package:pla_tr/companypages/CompanyList.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
@@ -11,8 +12,10 @@ class ResultPage extends StatefulWidget {
   final total;
   final correct;
   final incorrect;
+  final level;
 
-  const ResultPage({Key key, this.correct, this.incorrect, this.total})
+  const ResultPage(
+      {Key key, this.correct, this.incorrect, this.total, this.level})
       : super(key: key);
   @override
   _ResultPageState createState() => _ResultPageState();
@@ -75,7 +78,13 @@ class _ResultPageState extends State<ResultPage> {
                         backgroundColor: MaterialStateProperty.resolveWith(
                             (states) => Colors.blue)),
                     onPressed: () {
-                      Navigator.pushNamed(context, CompanyList.id);
+                      if (widget.level == "BegQuizData") {
+                        Navigator.pushNamed(context, CompanyList.id);
+                      } else if (widget.level == "AdvQuizData") {
+                        Navigator.pushNamed(context, AdvCompanyList.id);
+                      } else if (widget.level == "InterQuizData") {
+                        Navigator.pushNamed(context, InterCompanyList.id);
+                      }
                     },
                     child: Text(
                       "Apply for Companies",

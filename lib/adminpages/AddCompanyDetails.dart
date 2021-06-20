@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 import 'package:random_string/random_string.dart';
@@ -13,12 +12,12 @@ class CreateCompany extends StatefulWidget {
 
 class _CreateCompanyState extends State<CreateCompany> {
   final _formKey = GlobalKey<FormState>();
-  String companyLogoUrl, companyName, companyDetails;
+  String companyLogoUrl, companyName, companyDetails, companylevel;
 
   bool isLoading = false;
   String companyId;
 
-  DatabaseService databaseService = new DatabaseService(UserId());
+  DatabaseService databaseService = new DatabaseService();
 
   createCompany() async {
     companyId = randomAlphaNumeric(16);
@@ -31,10 +30,13 @@ class _CreateCompanyState extends State<CreateCompany> {
         "companyId": companyId,
         "companyLogoUrl": companyLogoUrl,
         "companyName": companyName,
-        "companyDetails": companyDetails
+        "companyDetails": companyDetails,
+        "companyLevel": companylevel,
       };
 
-      await databaseService.addCompanyData(companyData, companyId).then(
+      await databaseService
+          .addCompanyData(companyData, companyId, companylevel)
+          .then(
         (value) {
           setState(() {
             isLoading = false;
@@ -100,6 +102,16 @@ class _CreateCompanyState extends State<CreateCompany> {
                           hintText: "Company Details"),
                       onChanged: (val) {
                         companyDetails = val;
+                      },
+                    ),
+                    TextFormField(
+                      validator: (val) =>
+                          val.isEmpty ? "Enter Company level" : null,
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.description),
+                          hintText: "Beg or Inter or Adv + Companies"),
+                      onChanged: (val) {
+                        companylevel = val;
                       },
                     ),
                     Spacer(),

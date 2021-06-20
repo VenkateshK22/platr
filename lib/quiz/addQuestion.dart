@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 
 class AddQuestion extends StatefulWidget {
   static String id = "add_Question";
   final String quizId;
+  final String quizLevel;
 
-  const AddQuestion({Key key, this.quizId}) : super(key: key);
+  const AddQuestion({Key key, this.quizId, this.quizLevel}) : super(key: key);
   @override
   _AddQuestionState createState() => _AddQuestionState();
 }
@@ -16,7 +16,7 @@ class AddQuestion extends StatefulWidget {
 class _AddQuestionState extends State<AddQuestion> {
   final _formKey = GlobalKey<FormState>();
 
-  DatabaseService databaseService = new DatabaseService(UserId());
+  DatabaseService databaseService = new DatabaseService();
 
   bool isLoading = false;
 
@@ -24,9 +24,8 @@ class _AddQuestionState extends State<AddQuestion> {
 
   uploadQuizData() {
     if (_formKey.currentState.validate()) {
-      setState(() {
-        isLoading = true;
-      });
+      isLoading = true;
+      setState(() {});
 
       Map<String, String> questionMap = {
         "question": question,
@@ -36,18 +35,20 @@ class _AddQuestionState extends State<AddQuestion> {
         "option4": option4
       };
 
-      print("${widget.quizId}");
-      databaseService.addQuestionData(questionMap, widget.quizId).then((value) {
+      print("${widget.quizId} printing quiz id ");
+      databaseService
+          .addQuestionData(questionMap, widget.quizId, widget.quizLevel)
+          .then((value) {
+        print("inside add qstn");
         question = "";
         option1 = "";
         option2 = "";
         option3 = "";
         option4 = "";
-        setState(() {
-          isLoading = false;
-        });
+        isLoading = false;
+        setState(() {});
       }).catchError((e) {
-        print(e);
+        print("catching error $e ");
       });
     } else {
       print("error is happening ");

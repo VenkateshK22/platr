@@ -1,17 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
+import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/services/auth.dart';
 
 String email, password, repassword, username;
+
 final _formKey = GlobalKey<FormState>();
 AuthService authService = new AuthService();
-
+UserId user;
+String uid = UserId.userid;
 // ignore: non_constant_identifier_names
 SignUP(context) async {
   if (_formKey.currentState.validate()) {
-    authService.SignUpwitEmailandPass(email, password).then((value) {
+    authService.SignUpwitEmailandPass(email, password).then((value) async {
       if (value != null) {
         Navigator.pushReplacement(
           context,
@@ -112,26 +114,6 @@ Widget buildemailRow() {
     ),
   );
 }
-
-// Widget buildUnameRow() {
-//   return Padding(
-//     padding: EdgeInsets.all(8),
-//     child: Form(
-//       key: _formKey,
-//       child: TextFormField(
-//         validator: (value) {
-//           return value.isEmpty ? "Enter UserName" : null;
-//         },
-//         onChanged: (value) {
-//           username = value;
-//           print(value);
-//         },
-//         decoration:
-//             InputDecoration(prefixIcon: Icon(Icons.email), labelText: 'E-mail'),
-//       ),
-//     ),
-//   );
-// }
 
 Widget buildPasswordRow() {
   return Padding(

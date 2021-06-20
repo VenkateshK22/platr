@@ -1,4 +1,4 @@
 class UserId {
-  String userID;
-  UserId({this.userID});
+  static String userid;
+  static String email;
 }

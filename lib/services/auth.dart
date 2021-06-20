@@ -1,14 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pla_tr/models/user.dart';
-import 'package:pla_tr/services/database.dart';
 
 class AuthService {
-  var uid = UserId();
   FirebaseAuth _auth = FirebaseAuth.instance;
-
-  UserId userFromFireBaseUSer(User user) {
-    return user != null ? UserId(userID: user.uid) : null;
-  }
 
   // ignore: non_constant_identifier_names
   Future SigninEmailandPass(String email, String password) async {
@@ -16,7 +10,10 @@ class AuthService {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = userCredential.user;
-      return userFromFireBaseUSer(user);
+      print("${user.uid} in auth");
+      UserId.userid = user.uid;
+      UserId.email = email;
+      return user.uid;
     } catch (e) {
       print(e);
     }
@@ -28,8 +25,8 @@ class AuthService {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user;
-      await DatabaseService(uid).setUserData(email);
-      return userFromFireBaseUSer(user);
+      UserId.userid = user.uid;
+      return user.uid;
     } catch (e) {
       print(e);
     }

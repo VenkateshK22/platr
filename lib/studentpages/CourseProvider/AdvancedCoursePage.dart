@@ -13,32 +13,77 @@ class AdvancedCoursePage extends StatefulWidget {
 class _AdvancedCoursePageState extends State<AdvancedCoursePage> {
   // ignore: non_constant_identifier_names
   var CourseLang = <dynamic>[
-    //TODO:1 change links  allocate other assets if needed
-    CourseInfo('C Programming', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('Python', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('C++ Programming', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('Objective C ', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('Java Programming', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('SQL Programming', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('HTML and CSS', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('JavaScript', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('C# Programming', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('PHP ', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('Ruby ', 'https://youtu.be/KJgsSFOSQv0'),
-    CourseInfo('PERL ', 'https://youtu.be/KJgsSFOSQv0'),
+    //done-TODO:1 change links  allocate other assets if needed
+    CourseInfo('Amazon Web Services \nLearn Basics For\nBeginners ',
+        'https://www.youtube.com/watch?v=ulprqHHWlng'),
+    CourseInfo('Cloud Computing \nFor Beginners',
+        'https://www.youtube.com/watch?v=2LaAJq1lB1Q'),
+    CourseInfo('Data Science \nFor Beginners ',
+        'https://www.youtube.com/watch?v=-ETQ97mXXF0'),
+    CourseInfo('Dev Operations \nFull Course \nFor Beginners ',
+        'https://www.youtube.com/watch?v=hQcFE0RD0cQ'),
+    CourseInfo('Machine Learing w/ \nPython \nFor Beginners',
+        'https://www.youtube.com/watch?v=7eh4d6sabA0'),
+    CourseInfo('Neural Networking\n For Beginners',
+        'https://www.youtube.com/watch?v=ob1yS9g-Zcs'),
+    CourseInfo('Full Stack \nWeb Developer \nM E R N stack',
+        'https://www.youtube.com/watch?v=mrHNSanmqQ4'),
+    CourseInfo('Full Stack \nMobile App Developer \nFlutter & Firebase',
+        'https://www.youtube.com/watch?v=j-LOab_PzzU&t=1454s'),
   ];
 
   @override
   Widget build(BuildContext context) {
+    List color = [
+      Colors.red,
+      Colors.pink,
+      Colors.purple,
+      Colors.deepPurple,
+      Colors.indigo,
+      Colors.blue,
+      Colors.lightBlue,
+      Colors.cyan,
+      Colors.teal,
+      Colors.green,
+      Colors.lightGreen,
+      Colors.lime,
+      Colors.yellow,
+      Colors.amber,
+      Colors.orange,
+      Colors.deepOrange,
+    ];
+
+    List acccolor = [
+      Colors.redAccent,
+      Colors.pinkAccent,
+      Colors.purpleAccent,
+      Colors.deepPurpleAccent,
+      Colors.indigoAccent,
+      Colors.blueAccent,
+      Colors.lightBlueAccent,
+      Colors.cyanAccent,
+      Colors.tealAccent,
+      Colors.greenAccent,
+      Colors.lightGreenAccent,
+      Colors.limeAccent,
+      Colors.yellowAccent,
+      Colors.amberAccent,
+      Colors.orangeAccent,
+      Colors.deepOrangeAccent,
+    ];
+    color.shuffle();
+    acccolor.shuffle();
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: color[1],
           title: Text('Advanced Courses'),
         ),
         body: ListView.builder(
           itemCount: CourseLang.length,
           itemBuilder: (context, index) {
             return CourseCardAdvanced(
+              color: color[index],
+              acccolor: acccolor[index],
               txt: CourseLang[index].coursename,
               url: CourseLang[index].ytlink,
             );

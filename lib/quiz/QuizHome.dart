@@ -1,13 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/quiz/Quiz_Play.dart';
-import 'package:pla_tr/quiz/create_quiz_page.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 
 class QuizHome extends StatefulWidget {
   static String id = 'Quiz_home_Page';
+  final level;
+
+  const QuizHome({Key key, this.level}) : super(key: key);
 
   @override
   _QuizHomeState createState() => _QuizHomeState();
@@ -15,7 +16,7 @@ class QuizHome extends StatefulWidget {
 
 class _QuizHomeState extends State<QuizHome> {
   Stream quizStream;
-  DatabaseService databaseService = new DatabaseService(UserId());
+  DatabaseService databaseService = new DatabaseService();
 
   Widget quizList() {
     return Container(
@@ -33,6 +34,7 @@ class _QuizHomeState extends State<QuizHome> {
                       title: snapshot.data.docs[index]["quizTitle"],
                       desc: snapshot.data.docs[index]["quizDesc"],
                       quizId: snapshot.data.docs[index]["quizId"],
+                      level: snapshot.data.docs[index]["quizLevel"],
                     );
                   },
                 );
@@ -43,7 +45,7 @@ class _QuizHomeState extends State<QuizHome> {
 
   @override
   initState() {
-    databaseService.getQuizTileData().then((value) {
+    databaseService.getQuizTileData(widget.level).then((value) {
       setState(() {
         quizStream = value;
       });
@@ -60,32 +62,25 @@ class _QuizHomeState extends State<QuizHome> {
         elevation: 0.0,
       ),
       body: quizList(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CreateQuiz()),
-          );
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
 
 class QuizTile extends StatelessWidget {
+  final String level;
   final String imgURL;
   final String title;
   final String desc;
   final String quizId;
 
-  const QuizTile(
-      {Key key,
-      @required this.imgURL,
-      @required this.title,
-      @required this.desc,
-      this.quizId})
-      : super(key: key);
+  const QuizTile({
+    Key key,
+    @required this.imgURL,
+    @required this.title,
+    @required this.desc,
+    this.quizId,
+    this.level,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +88,9 @@ class QuizTile extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPlay(quizId)),
+          MaterialPageRoute(
+            builder: (context) => QuizPlay(quizId, level),
+          ),
         );
       },
       child: Container(

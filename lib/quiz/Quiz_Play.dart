@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pla_tr/models/questionModel.dart';
-import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/quiz/ResultsPage.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
@@ -9,7 +8,8 @@ import 'package:pla_tr/widgets/QuizplayWidget.dart';
 
 class QuizPlay extends StatefulWidget {
   final String quizId;
-  QuizPlay(this.quizId);
+  final String level;
+  QuizPlay(this.quizId, this.level);
 
   @override
   _QuizPlayState createState() => _QuizPlayState();
@@ -25,13 +25,13 @@ Stream infoStream;
 
 class _QuizPlayState extends State<QuizPlay> {
   QuerySnapshot questionSnapshot;
-  DatabaseService databaseService = new DatabaseService(UserId());
-
+  DatabaseService databaseService = new DatabaseService();
+//todo quiz  play not working check this
   bool isLoading = true;
 
   @override
   void initState() {
-    databaseService.getQuestionData(widget.quizId)?.then((val) {
+    databaseService.getQuestionData(widget.quizId, widget.level)?.then((val) {
       print("value is of in initstate $val");
       questionSnapshot = val;
 
@@ -138,7 +138,10 @@ class _QuizPlayState extends State<QuizPlay> {
             context,
             MaterialPageRoute(
               builder: (context) => ResultPage(
-                  total: total, correct: correct, incorrect: incorrect),
+                  total: total,
+                  correct: correct,
+                  incorrect: incorrect,
+                  level: widget.level),
             ),
           );
         },

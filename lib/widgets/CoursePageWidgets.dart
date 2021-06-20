@@ -21,16 +21,21 @@ class CourseCardBeginner extends StatelessWidget {
   final txt;
   final url;
   final image;
+  final color;
+  final acccolor;
   //final link;
   const CourseCardBeginner({
     Key key,
     this.txt,
     this.url,
     this.image,
+    this.color,
+    this.acccolor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String level = "BegQuizData";
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       height: MediaQuery.of(context).size.height / 9,
@@ -38,20 +43,18 @@ class CourseCardBeginner extends StatelessWidget {
         //image: DecorationImage(image: AssetImage(image)),
         borderRadius: BorderRadius.circular(25),
         gradient: LinearGradient(
-            colors: [Colors.blue, Colors.lightBlueAccent],
+            colors: [color, acccolor],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.lightBlueAccent,
-            blurRadius: 8,
-            offset: Offset(0, 6),
-          ),
-        ],
       ),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, QuizHome.id);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => QuizHome(level: level),
+            ),
+          );
           _launchInBrowser(url);
         },
         child: Text(
@@ -60,6 +63,8 @@ class CourseCardBeginner extends StatelessWidget {
         ),
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(20),
+          backgroundColor: MaterialStateProperty.resolveWith(
+              (states) => color), //!!cardcolor
         ),
       ),
     );
@@ -70,45 +75,56 @@ class CourseCardIntermediate extends StatelessWidget {
   final txt;
   final url;
   final image;
+  final color;
+  final acccolor;
   //final link;
   const CourseCardIntermediate({
     Key key,
     this.txt,
     this.url,
     this.image,
+    this.color,
+    this.acccolor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-      height: MediaQuery.of(context).size.height / 9,
-      decoration: BoxDecoration(
-        //image: DecorationImage(image: AssetImage(image)),
-        borderRadius: BorderRadius.circular(25),
-        gradient: LinearGradient(
-            colors: [Colors.blue, Colors.lightBlueAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.lightBlueAccent,
-            blurRadius: 8,
-            offset: Offset(0, 6),
+    String level = "InterQuizData";
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizHome(level: level),
           ),
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, QuizHome.id);
-          _launchInBrowser(url);
-        },
-        child: Text(
-          txt,
-          style: kTextStyleCourseCard,
+        );
+        _launchInBrowser(url);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
+        height: MediaQuery.of(context).size.height / 6,
+        decoration: BoxDecoration(
+          //image: DecorationImage(image: AssetImage(image)),
+          borderRadius: BorderRadius.circular(15),
+          color: color,
+          gradient: LinearGradient(
+              colors: [color, acccolor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: acccolor,
+          //     blurRadius: 8,
+          //     offset: Offset(0, 6),
+          //   ),
+          // ],
         ),
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all(20),
+        child: Center(
+          child: Text(
+            txt,
+            style: kTextStyleCourseCard,
+          ),
         ),
       ),
     );
@@ -118,45 +134,48 @@ class CourseCardIntermediate extends StatelessWidget {
 class CourseCardAdvanced extends StatelessWidget {
   final txt;
   final url;
+  final color;
+  final acccolor;
 
   //final link;
   const CourseCardAdvanced({
     Key key,
     this.txt,
     this.url,
+    this.color,
+    this.acccolor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-      height: MediaQuery.of(context).size.height / 9,
-      decoration: BoxDecoration(
-        //image: DecorationImage(image: AssetImage(image)),
-        borderRadius: BorderRadius.circular(25),
-        gradient: LinearGradient(
-            colors: [Colors.blue, Colors.lightBlueAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.lightBlueAccent,
-            blurRadius: 8,
-            offset: Offset(0, 6),
+    String level = "AdvQuizData";
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizHome(level: level),
           ),
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, QuizHome.id);
-          _launchInBrowser(url);
-        },
-        child: Text(
-          txt,
-          style: kTextStyleCourseCard,
+        );
+        _launchInBrowser(url);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
+        height: MediaQuery.of(context).size.height / 5,
+        decoration: BoxDecoration(
+          //image: DecorationImage(image: AssetImage(image)),
+          borderRadius: BorderRadius.circular(25),
+          color: color,
+          gradient: LinearGradient(
+              colors: [color, acccolor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
         ),
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all(20),
+        child: Center(
+          child: Text(
+            txt,
+            style: kTextStyleCourseCard,
+          ),
         ),
       ),
     );

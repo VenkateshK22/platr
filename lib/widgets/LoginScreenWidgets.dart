@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:pla_tr/adminpages/AdminDashBoard.dart';
 import 'package:pla_tr/authUI/SignupPage.dart';
 import 'package:pla_tr/services/auth.dart';
+import 'package:pla_tr/services/helpersharedref.dart';
 import 'package:pla_tr/studentpages/StudentDashBoard.dart';
 
 String email, password;
@@ -26,6 +27,8 @@ SignIN(context) async {
           ),
         );
       } else {
+        print("S in signin");
+        HelperFunction.saveUserLoginDetails(true);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

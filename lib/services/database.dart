@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pla_tr/models/user.dart';
 
 class DatabaseService {
-  final uid;
+  DatabaseService();
 
-  DatabaseService(this.uid);
-
-  Future<void> addQuizData(Map quizData, String quizId) async {
+  Future<void> addQuizData(Map quizData, String quizId, String level) async {
     await FirebaseFirestore.instance
-        .collection("QuizData")
+        .collection(level)
         .doc(quizId)
         .set(quizData)
         .catchError((e) {
@@ -15,32 +14,52 @@ class DatabaseService {
     });
   }
 
-  Future<void> addQuestionData(Map questionData, String quizId) async {
+  Future addQuestionData(Map questionData, String quizId, String level) async {
     await FirebaseFirestore.instance
-        .collection("QuizData")
+        .collection(level)
         .doc(quizId)
         .collection("QNA")
         .add(questionData)
         .catchError((e) {
-      print(e);
+      print("$e error from addqustn data database");
     });
   }
 
-  Future getQuizTileData() async {
-    return FirebaseFirestore.instance.collection("QuizData").snapshots();
+  Future getQuizTileData(String level) async {
+    return FirebaseFirestore.instance.collection(level).snapshots();
   }
 
-  Future getQuestionData(String quizId) async {
+  Future getQuestionData(String quizId, String level) async {
     return await FirebaseFirestore.instance
-        .collection("QuizData")
+        .collection(level)
         .doc(quizId)
         .collection("QNA")
         .get();
   }
 
-  Future<void> addCompanyData(Map companyData, String companyId) async {
+  Future appliedCompaniesData(String quizId, String level) async {
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(quizId)
+        .collection("AppliedCompanies")
+        .get();
+  }
+
+  Future applyToCompany(String companyid, String userid) async {
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userid)
+        .collection("AppliedCompanies")
+        .doc()
+        .set({
+      "company": companyid,
+    });
+  }
+
+  Future<void> addCompanyData(
+      Map companyData, String companyId, String companylevel) async {
     await FirebaseFirestore.instance
-        .collection("Companies")
+        .collection(companylevel)
         .doc(companyId)
         .set(companyData)
         .catchError((e) {
@@ -48,19 +67,45 @@ class DatabaseService {
     });
   }
 
-  Future getCompaniesData() async {
-    return FirebaseFirestore.instance.collection("Companies").snapshots();
+  Future getBegCompaniesData() async {
+    return FirebaseFirestore.instance.collection("BegCompanies").snapshots();
   }
 
-  Future getUserData() async {
-    return await FirebaseFirestore.instance.collection("Users").doc(uid).get();
+  Future getInterCompaniesData() async {
+    return FirebaseFirestore.instance.collection("InterCompanies").snapshots();
   }
 
-  Future setUserData(String email) async {
-    return await FirebaseFirestore.instance.collection("Users").doc(uid).set(
+  Future getAdvCompaniesData() async {
+    // companies is advcompanies in firebase console
+    return FirebaseFirestore.instance.collection("AdvCompanies").snapshots();
+  }
+
+  Future getUserData(String userid) async {
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userid)
+        .get();
+  }
+
+  Future getAllUserData() async {
+    return FirebaseFirestore.instance.collection("Users").snapshots();
+  }
+
+  Future setUserData(String name, String age, String email, String phone,
+      String gender, String resume, String education) async {
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(UserId.userid)
+        .set(
       {
-        'userid': uid,
+        'userid': UserId.userid,
+        'name': name,
         'email': email,
+        'age': age,
+        'gender': gender,
+        'phone': phone,
+        'resume': resume,
+        'education': education,
       },
     );
   }

@@ -11,189 +11,198 @@ class StudentDash extends StatefulWidget {
 }
 
 class _StudentDashState extends State<StudentDash> {
+  List color = [
+    Colors.red,
+    Colors.pink,
+    Colors.purple,
+    Colors.deepPurple,
+    Colors.indigo,
+    Colors.blue,
+    Colors.lightBlue,
+    Colors.cyan,
+    Colors.teal,
+    Colors.green,
+    Colors.lightGreen,
+    Colors.amber[900],
+    Colors.orange,
+    Colors.deepOrange,
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
-      child: Scaffold(
-        appBar: AppBar(
-          title: AppLogo(),
-        ),
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                color: Colors.blue,
-                height: 50,
-                child: Center(
-                  child: Text(
-                    "Student DashBoard",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+    color.shuffle();
+    return Scaffold(
+      appBar: AppBar(
+        title: AppLogo(),
+      ),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: color[4],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, CompanyDifficulty.id);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            child: Image.asset(
+                              "assets/images/companyadmin.png",
+                              height: MediaQuery.of(context).size.height / 4,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Companies \nList",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                              Text(
+                                "Apply to your \nFavorite Companies",
+                                style: TextStyle(fontSize: 15),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, CompanyDifficulty.id);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              child: Image.asset(
-                                "assets/images/company.png",
-                                height: MediaQuery.of(context).size.height / 4,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Companies \nList",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.teal),
-                                ),
-                                Text(
-                                  "Apply to your \nFavorite Companies",
-                                  style: TextStyle(fontSize: 15),
-                                )
-                              ],
-                            )
-                          ],
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: color[1],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 2,
+                          offset: Offset(0, 3), // changes position of shadow
                         ),
-                      ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, CoursePage.id);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 10,
                           ),
-                        ],
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, CoursePage.id);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Learn &\nPractise \nCode",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.teal),
-                                ),
-                                Text("Learn a new skill \nUp Your Game",
-                                    style: TextStyle(fontSize: 15))
-                              ],
-                            ),
-                            ClipRRect(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Learn &\nPractise \nCode",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                              Text("Learn a new skill \nUp Your Game",
+                                  style: TextStyle(fontSize: 15))
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: ClipRRect(
                                 child: Image.asset(
                               "assets/images/coding.png",
                               height: MediaQuery.of(context).size.height / 4,
                             )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
                           ),
                         ],
                       ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, StudentDetails.id);
-                        },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: color[9],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, StudentDetails.id);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: color[9],
+                        ),
+                        padding: EdgeInsets.all(45),
+                        height: MediaQuery.of(context).size.height / 4,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ClipRRect(
                               child: Image.asset(
-                                "assets/images/student.png",
-                                height: MediaQuery.of(context).size.height / 4,
+                                "assets/images/resume.png",
+                                height: MediaQuery.of(context).size.height / 6,
                               ),
                             ),
                             SizedBox(
                               width: 30,
                             ),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "Your \nDetails",
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.teal),
+                                      color: Colors.white),
                                 ),
                                 Text("Edit Your \nProfile Data",
                                     style: TextStyle(fontSize: 15))
@@ -203,11 +212,11 @@ class _StudentDashState extends State<StudentDash> {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
