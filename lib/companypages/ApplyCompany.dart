@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pla_tr/models/user.dart';
+import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 
 class ApplyCompany extends StatefulWidget {
@@ -7,14 +8,14 @@ class ApplyCompany extends StatefulWidget {
   final companyid;
   final companyimagelink;
   final String companyName;
-  final String companyDetails;
+  final String jobDetails;
 
   const ApplyCompany(
       {Key key,
       this.companyid,
       this.companyimagelink,
       this.companyName,
-      this.companyDetails})
+      this.jobDetails})
       : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class _ApplyCompanyState extends State<ApplyCompany> {
     Colors.red,
     Colors.purple,
     Colors.deepPurple,
-    Colors.indigo,
+    Colors.indigoAccent,
     Colors.blue,
     Colors.green,
     Colors.orange,
@@ -42,6 +43,7 @@ class _ApplyCompanyState extends State<ApplyCompany> {
   @override
   Widget build(BuildContext context) {
     color.shuffle();
+
     return Scaffold(
         appBar: AppBar(
           title: AppLogo(),
@@ -57,19 +59,21 @@ class _ApplyCompanyState extends State<ApplyCompany> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.all(5),
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: color[2],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    "Company ID: ${widget.companyid}",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  Center(
+                    child: Text(
+                      "Company ID: ${widget.companyid}",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
                   ),
                   SizedBox(
                     height: 23,
@@ -85,11 +89,11 @@ class _ApplyCompanyState extends State<ApplyCompany> {
                     ),
                   ),
                   SizedBox(
-                    height: 8,
+                    height: 10,
                   ),
                   Center(
                     child: Text(
-                      " ${widget.companyDetails}",
+                      " ",
                       style: TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.w700,
@@ -103,48 +107,53 @@ class _ApplyCompanyState extends State<ApplyCompany> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(15),
-              height: MediaQuery.of(context).size.height / 8,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: color[4],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  "Job Description: \n(Beginner) Associate Engineer ",
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+            GestureDetector(
+              onTap: () => Navigator.popAndPushNamed(context, CoursePage.id),
+              child: Container(
+                margin: EdgeInsets.all(7),
+                padding: EdgeInsets.all(15),
+                height: MediaQuery.of(context).size.height / 8,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: color[4],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    "Job Description: \n ${widget.jobDetails} ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              height: MediaQuery.of(context).size.height / 9,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: color[7],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  "Check out Learn and code to learn new skillset  ",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
+            GestureDetector(
+              onTap: () => Navigator.popAndPushNamed(context, CoursePage.id),
+              child: Container(
+                margin: EdgeInsets.all(8),
+                padding: EdgeInsets.all(10),
+                height: MediaQuery.of(context).size.height / 9,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: color[7],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    "Check out Learn and code to learn new skillset  ",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
             Spacer(),
             GestureDetector(
-              onTap: () {},
               child: Container(
                 color: Colors.green,
                 height: MediaQuery.of(context).size.height / 11,

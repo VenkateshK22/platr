@@ -18,6 +18,12 @@ SignIN(context) async {
   if (_formKey.currentState.validate()) {
     authService.SigninEmailandPass(email, password).then((value) {
       if (value == null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignupPage(),
+          ),
+        );
         print('sign-in not working');
       } else if (email == 'admin@admin.com') {
         Navigator.pushReplacement(

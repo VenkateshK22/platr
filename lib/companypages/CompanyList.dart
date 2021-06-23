@@ -44,7 +44,7 @@ class _CompanyListState extends State<CompanyList> {
                 return CompanyTile(
                   companyLogoUrl: stream.data.docs[index]["companyLogoUrl"],
                   companyName: stream.data.docs[index]["companyName"],
-                  companyDetails: stream.data.docs[index]["companyDetails"],
+                  jobDetails: stream.data.docs[index]["JobDetails"],
                   companyId: stream.data.docs[index]["companyId"],
                 );
               },
@@ -69,14 +69,14 @@ class _CompanyListState extends State<CompanyList> {
 class CompanyTile extends StatelessWidget {
   final String companyLogoUrl;
   final String companyName;
-  final String companyDetails;
+  final String jobDetails;
   final String companyId;
 
   const CompanyTile(
       {Key key,
       @required this.companyLogoUrl,
       @required this.companyName,
-      @required this.companyDetails,
+      @required this.jobDetails,
       this.companyId})
       : super(key: key);
 
@@ -90,7 +90,7 @@ class CompanyTile extends StatelessWidget {
             builder: (context) => ApplyCompany(
               companyid: companyId,
               companyimagelink: companyLogoUrl,
-              companyDetails: companyDetails,
+              jobDetails: jobDetails,
               companyName: companyName,
             ),
           ),

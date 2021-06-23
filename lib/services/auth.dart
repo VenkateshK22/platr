@@ -26,6 +26,7 @@ class AuthService {
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user;
       UserId.userid = user.uid;
+      UserId.email = email;
       return user.uid;
     } catch (e) {
       print(e);

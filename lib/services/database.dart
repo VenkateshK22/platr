@@ -100,7 +100,7 @@ class DatabaseService {
       {
         'userid': UserId.userid,
         'name': name,
-        'email': email,
+        'email': UserId.email,
         'age': age,
         'gender': gender,
         'phone': phone,

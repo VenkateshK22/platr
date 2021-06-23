@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/services/auth.dart';
+import 'package:pla_tr/services/database.dart';
 
 String email, password, repassword, username;
 
 final _formKey = GlobalKey<FormState>();
 AuthService authService = new AuthService();
+DatabaseService _databaseService = new DatabaseService();
 UserId user;
 String uid = UserId.userid;
 // ignore: non_constant_identifier_names
@@ -15,6 +17,7 @@ SignUP(context) async {
   if (_formKey.currentState.validate()) {
     authService.SignUpwitEmailandPass(email, password).then((value) async {
       if (value != null) {
+        _databaseService.setUserData("", "", "", "", "", "", "");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

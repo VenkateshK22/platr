@@ -12,7 +12,7 @@ class CreateCompany extends StatefulWidget {
 
 class _CreateCompanyState extends State<CreateCompany> {
   final _formKey = GlobalKey<FormState>();
-  String companyLogoUrl, companyName, companyDetails, companylevel;
+  String companyLogoUrl, companyName, jobDetails, companylevel;
 
   bool isLoading = false;
   String companyId;
@@ -30,7 +30,7 @@ class _CreateCompanyState extends State<CreateCompany> {
         "companyId": companyId,
         "companyLogoUrl": companyLogoUrl,
         "companyName": companyName,
-        "companyDetails": companyDetails,
+        "JobDetails": jobDetails,
         "companyLevel": companylevel,
       };
 
@@ -96,12 +96,12 @@ class _CreateCompanyState extends State<CreateCompany> {
                     ),
                     TextFormField(
                       validator: (val) =>
-                          val.isEmpty ? "Enter Company Details" : null,
+                          val.isEmpty ? "Enter Job Details" : null,
                       decoration: InputDecoration(
                           icon: Icon(Icons.description),
-                          hintText: "Company Details"),
+                          hintText: "Job Description"),
                       onChanged: (val) {
-                        companyDetails = val;
+                        jobDetails = val;
                       },
                     ),
                     TextFormField(
