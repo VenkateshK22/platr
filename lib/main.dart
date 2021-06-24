@@ -5,6 +5,7 @@ import 'package:pla_tr/adminpages/ViewStudentProfile.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/adminpages/AddCompanyDetails.dart';
 import 'package:pla_tr/companypages/AdvCompanyList.dart';
+import 'package:pla_tr/companypages/AppliedCompList.dart';
 import 'package:pla_tr/companypages/ApplyCompany.dart';
 import 'package:pla_tr/companypages/InterCompanyList.dart';
 import 'package:pla_tr/companypages/companyDifficulty.dart';
@@ -72,6 +73,7 @@ class _PlaTrState extends State<PlaTr> {
         AdminDashboard.id: (context) => AdminDashboard(),
         CreateQuiz.id: (context) => CreateQuiz(),
         StudentProfileViewA.id: (context) => StudentProfileViewA(),
+        AppliedCompanyList.id: (context) => AppliedCompanyList(),
       },
       initialRoute: LoginPage.id,
       //home: ((isLoggedin ?? false) ? StudentDash() : LoginPage()),

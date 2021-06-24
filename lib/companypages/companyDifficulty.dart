@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pla_tr/companypages/AdvCompanyList.dart';
+import 'package:pla_tr/companypages/AppliedCompList.dart';
 import 'package:pla_tr/companypages/CompanyList.dart';
 import 'package:pla_tr/companypages/InterCompanyList.dart';
 
@@ -14,6 +15,12 @@ class _CompanyDifficultyState extends State<CompanyDifficulty> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.popAndPushNamed(context, AppliedCompanyList.id);
+          },
+          child: Icon(Icons.check_box),
+        ),
         appBar: AppBar(
           title: Text('Company Levels'),
         ),

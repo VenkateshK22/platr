@@ -51,7 +51,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 imagepath: "assets/images/studentadmin.png",
               ),
               AdminDashCard(
-                nameofcard: "View Courses",
+                nameofcard: "Student Experience",
                 colorarg: 8,
                 route: CoursePage.id,
                 imagepath: "assets/images/online-course.png",

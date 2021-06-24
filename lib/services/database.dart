@@ -37,22 +37,27 @@ class DatabaseService {
         .get();
   }
 
-  Future appliedCompaniesData(String quizId, String level) async {
+  Future appliedCompaniesData(String userid) async {
     return await FirebaseFirestore.instance
         .collection("Users")
-        .doc(quizId)
+        .doc(userid)
         .collection("AppliedCompanies")
         .get();
   }
 
-  Future applyToCompany(String companyid, String userid) async {
+  Future applyToCompany(
+      String userid, String companyName, String companyLogo) async {
     return await FirebaseFirestore.instance
         .collection("Users")
         .doc(userid)
         .collection("AppliedCompanies")
         .doc()
         .set({
-      "company": companyid,
+      'userid': UserId.userid,
+      'companyName': companyName,
+      'companyLogoUrl': companyLogo,
+    }).catchError((e) {
+      print(e);
     });
   }
 
