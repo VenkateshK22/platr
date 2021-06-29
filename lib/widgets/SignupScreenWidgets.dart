@@ -51,7 +51,7 @@ Widget buildContainer(context) {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Sign-Up",
+                    "Sign Up",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,

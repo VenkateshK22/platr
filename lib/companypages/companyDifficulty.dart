@@ -17,7 +17,7 @@ class _CompanyDifficultyState extends State<CompanyDifficulty> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, AppliedCompanyList.id);
+            Navigator.pushNamed(context, AppliedCompanyList.id);
           },
           child: Icon(Icons.check_box),
         ),

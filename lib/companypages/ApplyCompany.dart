@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pla_tr/companypages/AppliedCompList.dart';
 import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
@@ -24,6 +25,8 @@ class ApplyCompany extends StatefulWidget {
 }
 
 class _ApplyCompanyState extends State<ApplyCompany> {
+  DatabaseService databaseService = new DatabaseService();
+
   String userid = UserId.userid;
   List color = [
     Colors.red,
@@ -42,9 +45,24 @@ class _ApplyCompanyState extends State<ApplyCompany> {
   }
 
   void addData() {
-    DatabaseService databaseService = new DatabaseService();
-    databaseService.applyToCompany(
-        userid, widget.companyName, widget.companyimagelink);
+    var snapshot;
+    bool insertBool = false;
+    snapshot = databaseService.getfromCompany(userid);
+    for (var i in snapshot) {
+      if (snapshot[i]['companyName'] == widget.companyName) {
+        print("inside add Data\n${snapshot[i]['companyName']}");
+        insertBool = false;
+      } else {
+        insertBool = true;
+      }
+    }
+    if (insertBool) {
+      databaseService.applyToCompany(
+          userid, widget.companyName, widget.companyimagelink);
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Already Applied!!')));
+    }
   }
 
   @override
@@ -162,6 +180,7 @@ class _ApplyCompanyState extends State<ApplyCompany> {
           GestureDetector(
             onTap: () {
               addData();
+              Navigator.popAndPushNamed(context, AppliedCompanyList.id);
             },
             child: Container(
               color: Colors.green,

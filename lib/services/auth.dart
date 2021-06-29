@@ -11,6 +11,7 @@ class AuthService {
           email: email, password: password);
       User user = userCredential.user;
       print("${user.uid} in auth");
+      print("$user in auth");
       UserId.userid = user.uid;
       UserId.email = email;
       return user.uid;
@@ -42,4 +43,6 @@ class AuthService {
       return null;
     }
   }
+
+  void doUserResetPassword() async {}
 }

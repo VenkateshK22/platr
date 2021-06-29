@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/companypages/companyDifficulty.dart';
 import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
 import 'package:pla_tr/studentpages/StudentDetails.dart';
+import 'package:pla_tr/widgets/LoginScreenWidgets.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 
 class StudentDash extends StatefulWidget {
@@ -34,6 +36,19 @@ class _StudentDashState extends State<StudentDash> {
     return Scaffold(
       appBar: AppBar(
         title: AppLogo(),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout_rounded),
+            tooltip: 'LogOut',
+            onPressed: () {
+              authService.SignOut();
+              Navigator.popAndPushNamed(context, LoginPage.id);
+
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(content: Text('This is logout')));
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Column(

@@ -26,7 +26,7 @@ Stream infoStream;
 class _QuizPlayState extends State<QuizPlay> {
   QuerySnapshot questionSnapshot;
   DatabaseService databaseService = new DatabaseService();
-//todo quiz  play not working check this
+
   bool isLoading = true;
 
   @override

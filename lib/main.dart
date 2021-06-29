@@ -7,6 +7,7 @@ import 'package:pla_tr/adminpages/AddCompanyDetails.dart';
 import 'package:pla_tr/companypages/AdvCompanyList.dart';
 import 'package:pla_tr/companypages/AppliedCompList.dart';
 import 'package:pla_tr/companypages/ApplyCompany.dart';
+import 'package:pla_tr/companypages/CompanyDashBoard.dart';
 import 'package:pla_tr/companypages/InterCompanyList.dart';
 import 'package:pla_tr/companypages/companyDifficulty.dart';
 import 'package:pla_tr/quiz/QuizHome.dart';
@@ -14,6 +15,7 @@ import 'package:pla_tr/quiz/ResultsPage.dart';
 import 'package:pla_tr/quiz/addQuestion.dart';
 import 'package:pla_tr/companypages/CompanyList.dart';
 import 'package:pla_tr/quiz/create_quiz_page.dart';
+import 'package:pla_tr/services/forgotpass.dart';
 import 'package:pla_tr/services/helpersharedref.dart';
 import 'package:pla_tr/studentpages/CourseProvider/AdvancedCoursePage.dart';
 import 'package:pla_tr/studentpages/CourseProvider/BeginnerCoursePage.dart';
@@ -73,9 +75,11 @@ class _PlaTrState extends State<PlaTr> {
         AdminDashboard.id: (context) => AdminDashboard(),
         CreateQuiz.id: (context) => CreateQuiz(),
         StudentProfileViewA.id: (context) => StudentProfileViewA(),
+        StudentProfileViewCompany.id: (context) => StudentProfileViewCompany(),
         AppliedCompanyList.id: (context) => AppliedCompanyList(),
+        ForgotPassword.id: (context) => ForgotPassword(),
       },
-      initialRoute: LoginPage.id,
+      home: LoginPage(),
       //home: ((isLoggedin ?? false) ? StudentDash() : LoginPage()),
     );
   }

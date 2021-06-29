@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pla_tr/adminpages/AddCompanyDetails.dart';
 import 'package:pla_tr/adminpages/ViewStudentProfile.dart';
+import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/quiz/create_quiz_page.dart';
+import 'package:pla_tr/services/auth.dart';
 import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -12,6 +14,7 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
+  AuthService authService = new AuthService();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,6 +31,19 @@ class _AdminDashboardState extends State<AdminDashboard> {
               ),
             ),
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout_rounded),
+              tooltip: 'LogOut',
+              onPressed: () {
+                authService.SignOut();
+                Navigator.popAndPushNamed(context, LoginPage.id);
+
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(content: Text('This is logout')));
+              },
+            ),
+          ],
         ),
         body: Container(
           child: Column(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pla_tr/authUI/LoginPage.dart';
+import 'package:pla_tr/services/auth.dart';
 import 'package:pla_tr/services/database.dart';
 
 class StudentProfileViewCompany extends StatefulWidget {
-  static String id = "Student_profile_view";
+  static String id = "company_dash_view";
 
   @override
   _StudentProfileViewCompanyState createState() =>
@@ -49,8 +51,22 @@ class _StudentProfileViewCompanyState extends State<StudentProfileViewCompany> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = new AuthService();
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout_rounded),
+            tooltip: 'LogOut',
+            onPressed: () {
+              authService.SignOut();
+              Navigator.popAndPushNamed(context, LoginPage.id);
+
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(content: Text('This is logout')));
+            },
+          ),
+        ],
         title: Center(child: Text("Student Profiles")),
       ),
       body: usersListWidget(),

@@ -41,9 +41,6 @@ class _IntermediateCoursePageState extends State<IntermediateCoursePage> {
     List color = [
       Colors.red,
       Colors.pink,
-      Colors.purple,
-      Colors.deepPurple,
-      Colors.indigo,
       Colors.blue,
       Colors.lightBlue,
       Colors.cyan,
@@ -55,16 +52,11 @@ class _IntermediateCoursePageState extends State<IntermediateCoursePage> {
       Colors.amber,
       Colors.orange,
       Colors.deepOrange,
-      Colors.brown,
-      Colors.blueGrey,
     ];
 
     List acccolor = [
-      Colors.redAccent,
       Colors.pinkAccent,
       Colors.purpleAccent,
-      Colors.deepPurpleAccent,
-      Colors.indigoAccent,
       Colors.blueAccent,
       Colors.lightBlueAccent,
       Colors.cyanAccent,

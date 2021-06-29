@@ -140,6 +140,12 @@ class _StudentDetailsState extends State<StudentDetails> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Student Details"),
+          actions: [
+            IconButton(
+                tooltip: 'Verify Your Email',
+                onPressed: () {},
+                icon: Icon(Icons.add_alert))
+          ],
         ),
         body: name == "empty"
             ? Center(

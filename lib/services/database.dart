@@ -4,6 +4,19 @@ import 'package:pla_tr/models/user.dart';
 class DatabaseService {
   DatabaseService();
 
+  Future getBegCompaniesData() async {
+    return FirebaseFirestore.instance.collection("BegCompanies").snapshots();
+  }
+
+  Future getInterCompaniesData() async {
+    return FirebaseFirestore.instance.collection("InterCompanies").snapshots();
+  }
+
+  Future getAdvCompaniesData() async {
+    // companies is advcompanies in firebase console
+    return FirebaseFirestore.instance.collection("AdvCompanies").snapshots();
+  }
+
   Future<void> addQuizData(Map quizData, String quizId, String level) async {
     await FirebaseFirestore.instance
         .collection(level)
@@ -38,11 +51,11 @@ class DatabaseService {
   }
 
   Future appliedCompaniesData(String userid) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("Users")
         .doc(userid)
         .collection("AppliedCompanies")
-        .get();
+        .snapshots();
   }
 
   Future applyToCompany(
@@ -61,6 +74,18 @@ class DatabaseService {
     });
   }
 
+  Future getfromCompany(String userid) async {
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userid)
+        .collection("AppliedCompanies")
+        .doc()
+        .get()
+        .catchError((e) {
+      print(e);
+    });
+  }
+
   Future<void> addCompanyData(
       Map companyData, String companyId, String companylevel) async {
     await FirebaseFirestore.instance
@@ -70,19 +95,6 @@ class DatabaseService {
         .catchError((e) {
       print(e);
     });
-  }
-
-  Future getBegCompaniesData() async {
-    return FirebaseFirestore.instance.collection("BegCompanies").snapshots();
-  }
-
-  Future getInterCompaniesData() async {
-    return FirebaseFirestore.instance.collection("InterCompanies").snapshots();
-  }
-
-  Future getAdvCompaniesData() async {
-    // companies is advcompanies in firebase console
-    return FirebaseFirestore.instance.collection("AdvCompanies").snapshots();
   }
 
   Future getUserData(String userid) async {

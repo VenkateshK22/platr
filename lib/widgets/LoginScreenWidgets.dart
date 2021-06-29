@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pla_tr/adminpages/AdminDashBoard.dart';
 import 'package:pla_tr/authUI/SignupPage.dart';
+import 'package:pla_tr/companypages/CompanyDashBoard.dart';
 import 'package:pla_tr/services/auth.dart';
+import 'package:pla_tr/services/forgotpass.dart';
 import 'package:pla_tr/services/helpersharedref.dart';
 import 'package:pla_tr/studentpages/StudentDashBoard.dart';
 
@@ -14,7 +16,7 @@ final _formKey = GlobalKey<FormState>();
 AuthService authService = new AuthService();
 
 // ignore: non_constant_identifier_names
-SignIN(context) async {
+signIN(context) async {
   if (_formKey.currentState.validate()) {
     authService.SigninEmailandPass(email, password).then((value) {
       if (value == null) {
@@ -32,8 +34,16 @@ SignIN(context) async {
             builder: (context) => AdminDashboard(),
           ),
         );
-      } else {
-        print("S in signin");
+      } else if (email == 'company@company.com') {
+        print("company in signin");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StudentProfileViewCompany(),
+          ),
+        );
+      } else if (value != null) {
+        print("Student in signin");
         HelperFunction.saveUserLoginDetails(true);
         Navigator.pushReplacement(
           context,
@@ -66,7 +76,7 @@ Widget buildContainer(context) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Login",
+                      "LogIn",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -77,7 +87,7 @@ Widget buildContainer(context) {
                 buildemailRow(),
                 buildPasswordRow(),
                 loginButton(context),
-                buildOrRow(),
+                buildOrRow(context),
                 signupButton(context),
               ],
             ),
@@ -158,12 +168,12 @@ Widget loginButton(context) {
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       Container(
-        margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-        height: 1.2 * (MediaQuery.of(context).size.height / 20),
+        margin: EdgeInsets.symmetric(vertical: 25, horizontal: 22),
+        height: 1.2 * (MediaQuery.of(context).size.height / 22),
         width: 5 * (MediaQuery.of(context).size.width / 10),
         child: ElevatedButton(
             onPressed: () {
-              SignIN(context);
+              signIN(context);
             },
             child: Text("Login")),
       ),
@@ -171,18 +181,23 @@ Widget loginButton(context) {
   );
 }
 
-Widget buildOrRow() {
+Widget buildOrRow(context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       Container(
-        child: Text(
-          '- OR -',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      )
+        child: TextButton(
+            onPressed: () => Navigator.pushNamed(
+                  context,
+                  ForgotPassword.id,
+                ),
+            child: Text(
+              '- Forgot Password -',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+              ),
+            )),
+      ),
     ],
   );
 }
@@ -193,8 +208,8 @@ Widget signupButton(context) {
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       Container(
-        margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-        height: 1.2 * (MediaQuery.of(context).size.height / 20),
+        margin: EdgeInsets.symmetric(vertical: 25, horizontal: 22),
+        height: 1.2 * (MediaQuery.of(context).size.height / 22),
         width: 5 * (MediaQuery.of(context).size.width / 10),
         child: ElevatedButton(
             onPressed: () {
