@@ -9,7 +9,6 @@ import 'BeginnerCoursePage.dart';
 
 class CoursePage extends StatefulWidget {
   static String id = 'course_page_home';
-  const CoursePage({Key key}) : super(key: key);
 
   @override
   _CoursePageState createState() => _CoursePageState();

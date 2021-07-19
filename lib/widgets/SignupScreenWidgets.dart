@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/models/user.dart';
 import 'package:pla_tr/services/auth.dart';
@@ -17,7 +18,8 @@ SignUP(context) async {
   if (_formKey.currentState.validate()) {
     authService.SignUpwitEmailandPass(email, password).then((value) async {
       if (value != null) {
-        _databaseService.setUserData("", "", "", "", "", "", "");
+        _databaseService.setUserData(
+            "-", "-", "${UserId.email}", "-", "-", "-", "-");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -40,11 +42,11 @@ Widget buildContainer(context) {
           Radius.circular(20),
         ),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.65,
+          height: MediaQuery.of(context).size.height * 0.7,
           width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(color: Colors.white),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
@@ -52,10 +54,14 @@ Widget buildContainer(context) {
                 children: [
                   Text(
                     "Sign Up",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: MediaQuery.of(context).size.height / 25),
+                    style: GoogleFonts.pacifico(
+                      color: Colors.blue,
+
+                      //textStyle: Theme.of(context).textTheme.headline4,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w300,
+                      //fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ],
               ),
@@ -77,20 +83,32 @@ Widget buildLogo(context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text(
-        "Pla-Tr",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: MediaQuery.of(context).size.height / 20,
+      RichText(
+        text: TextSpan(
+          style: TextStyle(fontSize: 22),
+          children: <TextSpan>[
+            TextSpan(
+              text: 'Pla',
+              style: GoogleFonts.pacifico(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+            TextSpan(
+              text: ' -Tr',
+              style: GoogleFonts.asap(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+          ],
         ),
       ),
       Container(
         padding: EdgeInsets.only(bottom: 15),
-        child: Icon(
-          Icons.work_rounded,
-          size: 80,
-          color: Colors.white,
+        child: Image.asset(
+          "assets/images/splash.png",
+          height: MediaQuery.of(context).size.height / 9,
         ),
       ),
     ],
@@ -171,14 +189,21 @@ Widget loginButton(context) {
         height: 1.2 * (MediaQuery.of(context).size.height / 20),
         width: 5 * (MediaQuery.of(context).size.width / 10),
         child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ));
-            },
-            child: Text("Login")),
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateColor.resolveWith((states) => Color(0xff48cae4)),
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ));
+          },
+          child: Text(
+            "Login",
+          ),
+        ),
       ),
     ],
   );
@@ -210,6 +235,10 @@ Widget signupButton(context) {
         height: 1.2 * (MediaQuery.of(context).size.height / 20),
         width: 5 * (MediaQuery.of(context).size.width / 10),
         child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateColor.resolveWith((states) => Color(0xff03045e)),
+            ),
             onPressed: () {
               SignUP(context);
             },

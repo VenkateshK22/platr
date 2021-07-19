@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pla_tr/adminpages/AdminDashBoard.dart';
+import 'package:pla_tr/adminpages/StdHelp.dart';
+import 'package:pla_tr/adminpages/StudentQueries.dart';
 import 'package:pla_tr/adminpages/ViewStudentProfile.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/adminpages/AddCompanyDetails.dart';
@@ -8,15 +11,17 @@ import 'package:pla_tr/companypages/AdvCompanyList.dart';
 import 'package:pla_tr/companypages/AppliedCompList.dart';
 import 'package:pla_tr/companypages/ApplyCompany.dart';
 import 'package:pla_tr/companypages/CompanyDashBoard.dart';
+import 'package:pla_tr/companypages/GetUserProfileData.dart';
 import 'package:pla_tr/companypages/InterCompanyList.dart';
 import 'package:pla_tr/companypages/companyDifficulty.dart';
+import 'package:pla_tr/companypages/studentprofileviewcompany.dart';
 import 'package:pla_tr/quiz/QuizHome.dart';
 import 'package:pla_tr/quiz/ResultsPage.dart';
 import 'package:pla_tr/quiz/addQuestion.dart';
 import 'package:pla_tr/companypages/CompanyList.dart';
 import 'package:pla_tr/quiz/create_quiz_page.dart';
-import 'package:pla_tr/services/forgotpass.dart';
-import 'package:pla_tr/services/helpersharedref.dart';
+import 'package:pla_tr/studentpages/changeemail.dart';
+import 'package:pla_tr/studentpages/forgotpass.dart';
 import 'package:pla_tr/studentpages/CourseProvider/AdvancedCoursePage.dart';
 import 'package:pla_tr/studentpages/CourseProvider/BeginnerCoursePage.dart';
 import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
@@ -29,6 +34,8 @@ import 'authUI/SignupPage.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.blue));
   runApp(PlaTr());
 }
 
@@ -41,10 +48,6 @@ class _PlaTrState extends State<PlaTr> {
   bool isLoggedin = false;
   initState() {
     super.initState();
-  }
-
-  checkUSERLoginStatus() async {
-    await HelperFunction.getUserLoginDetails();
   }
 
   @override
@@ -78,6 +81,12 @@ class _PlaTrState extends State<PlaTr> {
         StudentProfileViewCompany.id: (context) => StudentProfileViewCompany(),
         AppliedCompanyList.id: (context) => AppliedCompanyList(),
         ForgotPassword.id: (context) => ForgotPassword(),
+        ChangeEmailId.id: (context) => ChangeEmailId(),
+        CompanyDash.id: (context) => CompanyDash(),
+        GetUserProfileData.id: (context) => GetUserProfileData(),
+        StudentProfileViewCompany.id: (context) => StudentProfileViewCompany(),
+        HelpPage.id: (context) => HelpPage(),
+        StudentQueries.id: (context) => StudentQueries(),
       },
       home: LoginPage(),
       //home: ((isLoggedin ?? false) ? StudentDash() : LoginPage()),

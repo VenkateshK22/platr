@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pla_tr/companypages/AppliedCompList.dart';
 import 'package:pla_tr/models/user.dart';
@@ -28,6 +29,8 @@ class _ApplyCompanyState extends State<ApplyCompany> {
   DatabaseService databaseService = new DatabaseService();
 
   String userid = UserId.userid;
+  static bool exists = true;
+
   List color = [
     Colors.red,
     Colors.purple,
@@ -42,26 +45,54 @@ class _ApplyCompanyState extends State<ApplyCompany> {
   @override
   void initState() {
     super.initState();
+    checkExist(widget.companyid);
   }
 
-  void addData() {
-    var snapshot;
-    bool insertBool = false;
-    snapshot = databaseService.getfromCompany(userid);
-    for (var i in snapshot) {
-      if (snapshot[i]['companyName'] == widget.companyName) {
-        print("inside add Data\n${snapshot[i]['companyName']}");
-        insertBool = false;
-      } else {
-        insertBool = true;
-      }
+  static Future<bool> checkExist(String docID) async {
+    try {
+      print("inside checker $docID docid");
+      var snap;
+      snap = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(UserId.userid)
+          .collection('AppliedCompanies')
+          .doc(docID)
+          .get()
+          .then((value) {
+        if (value.exists) {
+          print("${value.id} exists ${value.data()}");
+          exists = true;
+        } else {
+          print("${value.id} does not exisst ${value.data()}");
+          exists = false;
+        }
+      });
+
+      print("$snap snap and $exists exists ");
+
+      return exists;
+    } catch (e) {
+      print(e);
+      return true;
     }
-    if (insertBool) {
-      databaseService.applyToCompany(
-          userid, widget.companyName, widget.companyimagelink);
+  }
+
+  void alreadyApplied() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Already Applied!!'),
+      ),
+    );
+  }
+
+  Future<void> addData() async {
+    if (exists) {
+      alreadyApplied();
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Already Applied!!')));
+      databaseService.insertIntappliedcompaniesstep1(widget.companyid);
+      databaseService.insertIntappliedcompanies(widget.companyid);
+      databaseService.applyToCompany(userid, widget.companyName,
+          widget.companyimagelink, widget.companyid);
     }
   }
 
@@ -155,7 +186,8 @@ class _ApplyCompanyState extends State<ApplyCompany> {
             ),
           ),
           GestureDetector(
-            onTap: () => Navigator.popAndPushNamed(context, CoursePage.id),
+            onTap: () =>
+                Navigator.restorablePopAndPushNamed(context, CoursePage.id),
             child: Container(
               margin: EdgeInsets.all(8),
               padding: EdgeInsets.all(10),
@@ -180,7 +212,10 @@ class _ApplyCompanyState extends State<ApplyCompany> {
           GestureDetector(
             onTap: () {
               addData();
-              Navigator.popAndPushNamed(context, AppliedCompanyList.id);
+              Navigator.pushNamed(
+                context,
+                AppliedCompanyList.id,
+              );
             },
             child: Container(
               color: Colors.green,

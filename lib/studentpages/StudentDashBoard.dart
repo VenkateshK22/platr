@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pla_tr/adminpages/StdHelp.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/companypages/companyDifficulty.dart';
 import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
@@ -38,6 +39,17 @@ class _StudentDashState extends State<StudentDash> {
         title: AppLogo(),
         actions: [
           IconButton(
+            icon: const Icon(Icons.help),
+            tooltip: 'Help!',
+            onPressed: () {
+              authService.SignOut();
+              Navigator.pushNamed(context, HelpPage.id);
+
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(content: Text('This is logout')));
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.logout_rounded),
             tooltip: 'LogOut',
             onPressed: () {
@@ -53,6 +65,7 @@ class _StudentDashState extends State<StudentDash> {
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -79,35 +92,37 @@ class _StudentDashState extends State<StudentDash> {
                       onTap: () {
                         Navigator.pushNamed(context, CompanyDifficulty.id);
                       },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            child: Image.asset(
-                              "assets/images/companyadmin.png",
-                              height: MediaQuery.of(context).size.height / 4,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Companies \nList",
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              child: Image.asset(
+                                "assets/images/companyadmin.png",
+                                height: MediaQuery.of(context).size.height / 4,
                               ),
-                              Text(
-                                "Apply to your \nFavorite Companies",
-                                style: TextStyle(fontSize: 15),
-                              )
-                            ],
-                          )
-                        ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Companies \nList",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  "Apply to your \nFavorite Companies",
+                                  style: TextStyle(fontSize: 15),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -136,13 +151,14 @@ class _StudentDashState extends State<StudentDash> {
                         Navigator.pushNamed(context, CoursePage.id);
                       },
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                             width: 10,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "Learn &\nPractise \nCode",
@@ -210,18 +226,20 @@ class _StudentDashState extends State<StudentDash> {
                             SizedBox(
                               width: 30,
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Your \nDetails",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white),
-                                ),
-                                Text("Edit Your \nProfile Data",
-                                    style: TextStyle(fontSize: 15))
-                              ],
+                            Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Your \nDetails",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white),
+                                  ),
+                                  Text("Edit Your \nProfile Data",
+                                      style: TextStyle(fontSize: 15))
+                                ],
+                              ),
                             )
                           ],
                         ),

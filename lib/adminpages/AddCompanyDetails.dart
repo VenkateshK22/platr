@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 import 'package:random_string/random_string.dart';
@@ -33,6 +34,7 @@ class _CreateCompanyState extends State<CreateCompany> {
         "JobDetails": jobDetails,
         "companyLevel": companylevel,
       };
+      Fluttertoast.showToast(msg: 'Company Details added Successfully!');
 
       await databaseService
           .addCompanyData(companyData, companyId, companylevel)

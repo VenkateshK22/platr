@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pla_tr/adminpages/AddCompanyDetails.dart';
+import 'package:pla_tr/adminpages/StudentQueries.dart';
 import 'package:pla_tr/adminpages/ViewStudentProfile.dart';
 import 'package:pla_tr/authUI/LoginPage.dart';
 import 'package:pla_tr/quiz/create_quiz_page.dart';
 import 'package:pla_tr/services/auth.dart';
-import 'package:pla_tr/studentpages/CourseProvider/CoursePageHome.dart';
 
 class AdminDashboard extends StatefulWidget {
   static String id = "Admin_Dash";
@@ -49,28 +49,28 @@ class _AdminDashboardState extends State<AdminDashboard> {
           child: Column(
             children: [
               AdminDashCard(
-                nameofcard: "Add Companies",
+                nameofcard: "   Add Companies",
                 colorarg: 2,
                 route: CreateCompany.id,
                 imagepath: "assets/images/companyadmin.png",
               ),
               AdminDashCard(
-                nameofcard: "Add Quiz Data",
+                nameofcard: "   Add Quiz Data",
                 colorarg: 4,
                 route: CreateQuiz.id,
                 imagepath: "assets/images/quizadmin.png",
               ),
               AdminDashCard(
-                nameofcard: "Students Profiles",
+                nameofcard: "   Students Profiles",
                 colorarg: 6,
                 route: StudentProfileViewA.id,
                 imagepath: "assets/images/studentadmin.png",
               ),
               AdminDashCard(
-                nameofcard: "Student Experience",
-                colorarg: 8,
-                route: CoursePage.id,
-                imagepath: "assets/images/online-course.png",
+                nameofcard: "   Students Queries",
+                colorarg: 6,
+                route: StudentQueries.id,
+                imagepath: "assets/images/query.png",
               ),
             ],
           ),
@@ -118,7 +118,7 @@ class AdminDashCard extends StatelessWidget {
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(2),
         width: double.infinity,
-        height: MediaQuery.of(context).size.height / 6,
+        height: MediaQuery.of(context).size.height / 4.6,
         child: Center(
           child: Row(
             children: [

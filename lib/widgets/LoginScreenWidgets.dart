@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pla_tr/adminpages/AdminDashBoard.dart';
 import 'package:pla_tr/authUI/SignupPage.dart';
 import 'package:pla_tr/companypages/CompanyDashBoard.dart';
 import 'package:pla_tr/services/auth.dart';
-import 'package:pla_tr/services/forgotpass.dart';
+import 'package:pla_tr/studentpages/forgotpass.dart';
 import 'package:pla_tr/services/helpersharedref.dart';
 import 'package:pla_tr/studentpages/StudentDashBoard.dart';
 
@@ -39,7 +40,7 @@ signIN(context) async {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => StudentProfileViewCompany(),
+            builder: (context) => CompanyDash(),
           ),
         );
       } else if (value != null) {
@@ -69,7 +70,7 @@ Widget buildContainer(context) {
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: BoxDecoration(color: Colors.white),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
@@ -77,10 +78,13 @@ Widget buildContainer(context) {
                   children: [
                     Text(
                       "LogIn",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: MediaQuery.of(context).size.height / 25),
+                      style: GoogleFonts.pacifico(
+                        //textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 30,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w300,
+                        //fontStyle: FontStyle.italic,
+                      ),
                     ),
                   ],
                 ),
@@ -100,20 +104,32 @@ Widget buildLogo(context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text(
-        "Pla-Tr",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: MediaQuery.of(context).size.height / 20,
+      RichText(
+        text: TextSpan(
+          style: TextStyle(fontSize: 22),
+          children: <TextSpan>[
+            TextSpan(
+              text: 'Pla',
+              style: GoogleFonts.pacifico(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+            TextSpan(
+              text: ' -Tr',
+              style: GoogleFonts.asap(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+          ],
         ),
       ),
       Container(
         padding: EdgeInsets.only(bottom: 15),
-        child: Icon(
-          Icons.work_rounded,
-          size: 80,
-          color: Colors.white,
+        child: Image.asset(
+          "assets/images/splash.png",
+          height: 80,
         ),
       ),
     ],
@@ -172,6 +188,10 @@ Widget loginButton(context) {
         height: 1.2 * (MediaQuery.of(context).size.height / 22),
         width: 5 * (MediaQuery.of(context).size.width / 10),
         child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateColor.resolveWith((states) => Color(0xff03045e)),
+            ),
             onPressed: () {
               signIN(context);
             },
@@ -212,6 +232,10 @@ Widget signupButton(context) {
         height: 1.2 * (MediaQuery.of(context).size.height / 22),
         width: 5 * (MediaQuery.of(context).size.width / 10),
         child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateColor.resolveWith((states) => Color(0xff48cae4)),
+            ),
             onPressed: () {
               Navigator.pushReplacement(
                   context,

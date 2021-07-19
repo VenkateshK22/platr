@@ -20,7 +20,7 @@ class _StudentDetailsState extends State<StudentDetails> {
       gender = "empty",
       educ = "empty",
       resume = "empty",
-      email = "empty",
+      email = UserId.email,
       userid = UserId.userid;
   var snapshot;
 
@@ -54,6 +54,7 @@ class _StudentDetailsState extends State<StudentDetails> {
 
   @override
   Widget build(BuildContext context) {
+    email = UserId.email;
     List color = [
       Colors.red,
       Colors.pink,
@@ -140,12 +141,6 @@ class _StudentDetailsState extends State<StudentDetails> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Student Details"),
-          actions: [
-            IconButton(
-                tooltip: 'Verify Your Email',
-                onPressed: () {},
-                icon: Icon(Icons.add_alert))
-          ],
         ),
         body: name == "empty"
             ? Center(
@@ -153,9 +148,10 @@ class _StudentDetailsState extends State<StudentDetails> {
                   child: Text(
                     "Add Data",
                     style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.red,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               )

@@ -1,27 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppLogo extends StatelessWidget {
   //App name logo widget
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RichText(
-        text: TextSpan(
-          style: TextStyle(fontSize: 22),
-          children: <TextSpan>[
-            TextSpan(
-              text: 'Pla',
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-            TextSpan(
-              text: ' -Tr',
-              style:
-                  TextStyle(fontWeight: FontWeight.w800, color: Colors.white),
-            ),
-          ],
-        ),
+    return RichText(
+      text: TextSpan(
+        style: TextStyle(fontSize: 22),
+        children: <TextSpan>[
+          TextSpan(
+            text: 'Pla',
+            style: GoogleFonts.pacifico(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+          ),
+          TextSpan(
+            text: ' -Tr',
+            style: GoogleFonts.asap(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+          ),
+        ],
       ),
     );
   }
