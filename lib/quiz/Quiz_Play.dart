@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pla_tr/models/questionModel.dart';
 import 'package:pla_tr/quiz/ResultsPage.dart';
+import 'package:pla_tr/quiz/failedpage.dart';
 import 'package:pla_tr/services/database.dart';
 import 'package:pla_tr/widgets/QuizWidgets.dart';
 import 'package:pla_tr/widgets/QuizplayWidget.dart';
@@ -134,16 +135,24 @@ class _QuizPlayState extends State<QuizPlay> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check),
         onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ResultPage(
-                  total: total,
-                  correct: correct,
-                  incorrect: incorrect,
-                  level: widget.level),
-            ),
-          );
+          if (correct > 5) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultPage(
+                    total: total,
+                    correct: correct,
+                    incorrect: incorrect,
+                    level: widget.level),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FAiledtoScore(),
+                ));
+          }
         },
       ),
     );

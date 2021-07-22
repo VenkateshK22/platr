@@ -15,7 +15,7 @@ class _OptionTileState extends State<OptionTile> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
+      child: Wrap(
         children: [
           Container(
             height: 28,
